@@ -17,7 +17,7 @@ var paths = {
     mainScript: './app/scripts/main.jsx',
     mainStyle: './app/styles/main.scss',
 
-    styles: './app/**/*.scss'
+    styles: './app/**/*.scss',
     scripts: './app/**/*.jsx',
 };
 
@@ -27,7 +27,7 @@ var continueOnError = function (err) {
     this.emit("end");
 };
 
-gulp.task('buildScripts', ['buildVendorScripts'], function () {
+gulp.task('buildScripts', function () {
     return (
         browserify({
             files: es6ify.runtime,
@@ -80,9 +80,7 @@ gulp.task('default', [
     watch([
         { dir: paths.index, action: 'buildIndex' },
         { dir: paths.scripts, action: 'buildScripts' },
-        { dir: paths.views, action: 'buildViews' },
         { dir: paths.styles, action: 'buildStyles' },
-        { dir: paths.images, action: 'buildImages' }
     ]);
 
 });
