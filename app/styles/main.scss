@@ -1,36 +1,4 @@
-@import 'normalize-scss/normalize';
-
-* { box-sizing: border-box; }
-
-.page-header {
-    display: flex;
-    width: 100%;
-    padding: 10px;
-    background: #fafafa;
-}
-
-.page-header-logo {
-    float: left;
-    margin: 0;
-    margin-right: 10px;
-
-    color: #444;
-    font-family: 'Noto Sans';
-    font-size: 30px;
-    line-height: 36px;
-}
-
-.page-header-search {
-    flex: 1;
-    margin: 6px 0;
-    height: 24px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    vertical-align: top;
-
-    padding-left: 5px;
-
-    &:focus {
-        outline: 0;
-    }
-}
+@import 'normalize-scss/normalize',
+        'base',
+        'page-header',
+        'search-results';
