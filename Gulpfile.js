@@ -33,7 +33,8 @@ gulp.task('buildScripts', function () {
             files: es6ify.runtime,
             debug: true
         })
-        .require('./bower_components/react/react.js', {expose: 'react.js'})
+        .require('./bower_components/react/react.js', {expose: 'react'})
+        .require('./bower_components/ramda/ramda.js', {expose: 'ramda'})
         .add(paths.mainScript)
         .transform(reactify)
         .transform(es6ify.configure(/.jsx/))
@@ -72,7 +73,7 @@ gulp.task('default', [
             gulp.watch(each.dir, [each.action])
                 .on('change', function () {
                     // Icky icky hack to compensate for slow JS build.
-                    setTimeout(livereload.changed, 100);
+                    setTimeout(livereload.changed, 500);
                 });
         });
     };
