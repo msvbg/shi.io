@@ -18,7 +18,7 @@ var paths = {
     mainStyle: './app/styles/main.scss',
 
     styles: './app/**/*.scss',
-    scripts: './app/**/*.jsx',
+    scripts: './app/**/*.{js,jsx}',
 };
 
 var continueOnError = function (err) {
@@ -37,7 +37,7 @@ gulp.task('buildScripts', function () {
         .require('./bower_components/ramda/ramda.js', {expose: 'ramda'})
         .add(paths.mainScript)
         .transform(reactify)
-        .transform(es6ify.configure(/.jsx/))
+        .transform(es6ify.configure(/.(js|jsx)/))
         .bundle().on('error', continueOnError)
         .pipe(source('scripts/app.js'))
         .pipe(gulp.dest(paths.build)));
