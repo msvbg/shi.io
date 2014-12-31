@@ -27,6 +27,7 @@ var continueOnError = function (err) {
     this.emit("end");
 };
 
+gulp.task('reloadScripts', ['buildScripts'], doReload);
 gulp.task('buildScripts', function () {
     return (
         browserify({
@@ -43,6 +44,7 @@ gulp.task('buildScripts', function () {
         .pipe(gulp.dest(paths.build)));
 });
 
+gulp.task('reloadStyles', ['buildStyles'], doReload);
 gulp.task('buildStyles', function () {
     return gulp.src(paths.mainStyle)
         .pipe(sass({
@@ -56,6 +58,7 @@ gulp.task('buildStyles', function () {
         .pipe(gulp.dest(paths.build));
 });
 
+gulp.task('reloadIndex', ['buildIndex'], doReload);
 gulp.task('buildIndex', function () {
     return gulp.src(paths.index)
         .pipe(gulp.dest(paths.build));
@@ -70,18 +73,18 @@ gulp.task('default', [
 
     var watch = function (what) {
         what.forEach(function (each) {
-            gulp.watch(each.dir, [each.action])
-                .on('change', function () {
-                    // Icky icky hack to compensate for slow JS build.
-                    setTimeout(livereload.changed, 500);
-                });
+            gulp.watch(each.dir, [each.action]);
         });
     };
   
     watch([
-        { dir: paths.index, action: 'buildIndex' },
-        { dir: paths.scripts, action: 'buildScripts' },
-        { dir: paths.styles, action: 'buildStyles' },
+        { dir: paths.index, action: 'reloadIndex' },
+        { dir: paths.scripts, action: 'reloadScripts' },
+        { dir: paths.styles, action: 'reloadStyles' },
     ]);
 
 });
+
+function doReload() {
+    return livereload.changed();
+}
