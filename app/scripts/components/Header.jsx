@@ -15,13 +15,15 @@ export default React.createClass({
                 <input
                     className="page-header-search"
                     type="search"
-                    onChange={this.search}
+                    onChange={this.onSearch}
                     value={this.state.query} />
             </header>
         );
     },
-    search: function (event) {
-        this.setState({ query: event.target.value });
-        Actions.search(this.state.query);
+    onSearch: function (event) {
+        let query = event.target.value;
+
+        this.setState({ query: query });
+        Actions.search(query);
     }
 });

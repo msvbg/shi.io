@@ -1,15 +1,16 @@
 let React = require('react');
 
-import EntryStore from '../stores/EntryStore.js';
+import SearchResultStore from '../stores/SearchResultStore.js';
 import Header from './Header.jsx';
+import SearchResults from './SearchResults.jsx';
 
 export default React.createClass({
     render: function () {
         return (
             <div>
                 <Header />
+                <SearchResults />
             </div>
         );
     }
 });
-              //<SearchResults searchResults={this.props.searchResults} />

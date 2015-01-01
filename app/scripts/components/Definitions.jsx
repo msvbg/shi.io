@@ -1,4 +1,7 @@
-let Definitions = React.createClass({
+let React = require('react');
+let R = require('ramda');
+
+export default React.createClass({
     render: function () {
         let english = R.pipe(
             R.filter(R.where({ lang: 'en' })),
