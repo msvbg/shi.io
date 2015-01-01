@@ -4,7 +4,8 @@
   "description": "An open, collaborative Chinese dictionary for the future.",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "start": "node app/server/bootstrap.js",
+    "test": "jest --config jest-config.json"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,8 @@
   },
   "homepage": "https://github.com/msvbg/shi.io",
   "devDependencies": {
+    "es6-module-loader": "^0.11.0",
+    "express": "^4.10.6",
     "flux": "^2.0.1",
     "gulp": "^3.8.10",
     "gulp-autoprefixer": "^2.0.0",
@@ -25,6 +28,7 @@
     "gulp-rename": "^1.2.0",
     "gulp-sass": "^1.2.4",
     "gulp-util": "^3.0.1",
+    "jest-cli": "^0.2.1",
     "keymirror": "^0.1.1",
     "object-assign": "^2.0.0",
     "reactify": "^0.17.1"
