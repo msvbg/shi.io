@@ -1,5 +1,4 @@
-let React = require('react');
-
+import React from 'react';
 import Actions from '../actions/Actions.js';
 
 export default React.createClass({

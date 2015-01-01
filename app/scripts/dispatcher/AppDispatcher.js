@@ -1,7 +1,7 @@
-let Dispatcher = require('flux').Dispatcher;
-let assign = require('object-assign');
+import Flux from 'flux';
+import assign from 'object-assign';
 
-export default assign(new Dispatcher(), {
+export default assign(new Flux.Dispatcher(), {
 
     handleViewAction: function (action) {
         this.dispatch({

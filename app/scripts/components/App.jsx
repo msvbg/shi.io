@@ -1,5 +1,4 @@
-let React = require('react');
-
+import React from 'react';
 import SearchResultStore from '../stores/SearchResultStore.js';
 import Header from './Header.jsx';
 import SearchResults from './SearchResults.jsx';

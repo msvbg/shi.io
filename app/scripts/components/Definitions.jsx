@@ -1,5 +1,5 @@
-let React = require('react');
-let R = require('ramda');
+import React from 'react';
+import R from 'ramda';
 
 export default React.createClass({
     render: function () {
