@@ -11,7 +11,7 @@ var gulp = require('gulp'),
     reactify = require('reactify');
 
 var paths = {
-    build: './build',
+    public: './public',
 
     index: './app/index.html',
     mainScript: './app/scripts/main.jsx',
@@ -41,7 +41,7 @@ gulp.task('buildScripts', function () {
         .transform(es6ify.configure(/.(js|jsx)/))
         .bundle().on('error', continueOnError)
         .pipe(source('scripts/app.js'))
-        .pipe(gulp.dest(paths.build)));
+        .pipe(gulp.dest(paths.public)));
 });
 
 gulp.task('reloadStyles', ['buildStyles'], doReload);
@@ -55,13 +55,13 @@ gulp.task('buildStyles', function () {
         .pipe(rename(function (path) {
             path.dirname += '/styles';
         }))
-        .pipe(gulp.dest(paths.build));
+        .pipe(gulp.dest(paths.public));
 });
 
 gulp.task('reloadIndex', ['buildIndex'], doReload);
 gulp.task('buildIndex', function () {
     return gulp.src(paths.index)
-        .pipe(gulp.dest(paths.build));
+        .pipe(gulp.dest(paths.public));
 })
 
 gulp.task('default', [
