@@ -16,7 +16,8 @@ export default React.createClass({
                     className="page-header-search"
                     type="search"
                     onChange={this.onSearch}
-                    value={this.state.query} />
+                    value={this.state.query}
+                    autoFocus />
             </header>
         );
     },

@@ -30,7 +30,7 @@ let SearchResultStore = assign({}, EventEmitter.prototype, {
     if (query === "Hi") {
         return entries;
     } else {
-        return [];
+        return entries;
     }
   },
 

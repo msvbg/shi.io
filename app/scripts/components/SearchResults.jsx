@@ -5,7 +5,7 @@ import SearchResultStore from '../stores/SearchResultStore.js';
 export default React.createClass({
     getInitialState: function () {
         return {
-            searchResults: []
+            searchResults: SearchResultStore.getSearchResults()
         };
     },
     componentDidMount: function () {
@@ -16,8 +16,10 @@ export default React.createClass({
             result => 
                 <li key={result.id}
                     className="search-results-item">
-                    <h2 className="search-results-headword">{result.headword}</h2>
-                    <Definitions definitions={result.definitions} />
+                    <h2 className="search-results-item-headword">{result.headword}</h2>
+                    <div className="search-results-item-content">
+                        <Definitions definitions={result.definitions} />
+                    </div>
                 </li>
         );
 
