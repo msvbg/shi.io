@@ -1,4 +1,4 @@
-let pg = require('pg');
+import pg from 'pg';
 
 let connectionString = 'postgres://martin:@localhost/shi_io';
 
@@ -18,7 +18,6 @@ function queryDatabase(query, parameters = []) {
         });
     });
 }
-
 
 export function search (query) {
     return queryDatabase(
