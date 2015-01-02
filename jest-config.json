@@ -1,0 +1,8 @@
+{
+  "testDirectoryName": "tests",
+  "scriptPreprocessor": "./node_modules/6to5-jest",
+  "unmockedModulePathPatterns": [
+    "ramda",
+    "keymirror"
+  ]
+}
