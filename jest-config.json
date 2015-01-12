@@ -1,8 +1,5 @@
 {
   "testDirectoryName": "tests",
   "scriptPreprocessor": "./node_modules/6to5-jest",
-  "unmockedModulePathPatterns": [
-    "ramda",
-    "keymirror"
-  ]
+  "setupTestFrameworkScriptFile": "./config/test_setup.js"
 }

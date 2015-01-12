@@ -1,4 +1,3 @@
-import '6to5/polyfill';
 jest.dontMock('../app/server/chinese.js');
 import chinese from '../app/server/chinese';
 
