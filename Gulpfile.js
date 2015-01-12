@@ -8,8 +8,9 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     livereload = require('gulp-livereload'),
     concat = require('gulp-concat'),
-    reactify = require('reactify');
+    reactify = require('reactify'),
     jshint = require('gulp-jshint'),
+    react = require('gulp-react'),
     jshintStylish = require('jshint-stylish');
 
 var paths = {
@@ -36,8 +37,6 @@ gulp.task('buildScripts', function () {
             files: es6ify.runtime,
             debug: true
         })
-        .require('./bower_components/react/react.js', {expose: 'react'})
-        .require('./bower_components/ramda/ramda.js', {expose: 'ramda'})
         .add(paths.mainScript)
         .transform(reactify)
         .transform(es6ify.configure(/.(js|jsx)/))
