@@ -9,7 +9,7 @@ export default React.createClass({
 
         let definitions =
             this.props.definitions
-            .map(english)
+            //.map(english)
             .map(definition =>
                 <li className="definition-list-item"
                     key={definition.index}>{definition.text}</li>

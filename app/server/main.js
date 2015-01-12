@@ -8,8 +8,15 @@ app.use(express.static(__dirname + '/../../public'));
 app.use(compression());
 
 app.get('/api/search', function (req, res) {
-    let searchQuery = req.query['query'];
-    res.sendStatus(search(searchQuery));
+    let searchQuery = req.query.query;
+    
+    search(searchQuery)
+        .then(function (result) {
+            res.json(result);
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
 });
 
 let server = app.listen(1534, function () {

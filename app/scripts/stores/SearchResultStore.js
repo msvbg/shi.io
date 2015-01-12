@@ -2,6 +2,7 @@ import EventEmitter from 'events';
 import assign from 'object-assign';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import Actions from '../constants/ActionConstants.js';
+import $ from 'jquery';
 
 let entries = [
     {
@@ -50,7 +51,18 @@ let SearchResultStore = assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function (payload) {
   query = payload.action.query;
 
-  SearchResultStore.emitChange();
+  $.get('/api/search?query='+query, function (result) {
+    var n = 0;
+    entries = result.map(function (x) {
+      n += 1;
+      return {
+        id: n,
+        headword: x.headword,
+        definitions: [{ index: 1, lang: "en", text: x.definitions }]
+      };
+    });
+    SearchResultStore.emitChange();
+  });
 
   return true;
 });
