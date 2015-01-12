@@ -1,4 +1,7 @@
 import R from 'ramda';
+import length from 'string-length';
+import keymirror from 'keymirror';
+import {stringSlice} from '../common/utilities.js';
 
 const CJK_RANGES = [
     [0x4E00, 0x9FFF],
@@ -45,8 +48,14 @@ const PINYIN_SYLLABLES = [
     'xing','xiong','xu','xue','xuan','xun','a','o','e','ai','ei','ai','ao','ou',
     'an','en','ang','ong','wu','wa','wo','wai','wei','wan','wang','wen','weng',
     'yi','ya','ye','yao','you','yan','yang','yin','ying','yong','yu','yue',
-    'yuan','yun','ng'
+    'yuan','yun'
 ];
+
+const SyllableTypes = keymirror({
+    HANZI: null,
+    FLAT_PINYIN: null,
+    NUMBERED_PINYIN: null
+});
 
 const MAX_PINYIN_LENGTH = R.max(
     R.map(
@@ -75,7 +84,7 @@ const VALID_PINYIN_CHARACTERS =
 export function isCJKCharacter (character) {
     if (!character || character.length !== 1) { return false; }
 
-    for (cjkRange of CJK_RANGES) {
+    for (let cjkRange of CJK_RANGES) {
         let codePoint = character.codePointAt(0);
 
         if (codePoint > cjkRange[0] && codePoint < cjkRange[1]) {
@@ -92,6 +101,22 @@ export function isCJKCharacter (character) {
  */
 export function isFlatPinyinSyllable (syllable) {
     return PINYIN_SYLLABLES.indexOf(syllable.toLowerCase()) !== -1;
+}
+
+/**
+ * Finds the longest flat pinyin syllable at the beginning of the string
+ * passed to the function.
+ */
+export function greedyFindFlatPinyin (haystack) {
+    for (let i = MAX_PINYIN_LENGTH; i > 0; --i) {
+        let substr = stringSlice(haystack, 0, i);
+
+        if (isFlatPinyinSyllable(substr)) {
+            return substr;
+        }
+    }
+
+    return undefined;
 }
 
 /**
@@ -196,6 +221,73 @@ export function numberedSyllableToDiacritic (input) {
         input.substring(index + 1, input.length - 1);
 }
 
-export function smartPartition (input) {
+function matchNumberedPinyin(string) {
+    let pinyin = greedyFindFlatPinyin(string);
 
+    if (pinyin) {
+        let maybeNumber = string.charAt(pinyin.length);
+
+        if (parseInt(maybeNumber, 10)) {
+            return stringSlice(string, 0, pinyin.length + 1);
+        }
+    }
+
+    return undefined;
+}
+
+/**
+ * 狮zi3wang -> 狮 zi3 wang
+ * zi1zizizi -> zi1 zi zi zi
+ */
+export function smartPartition (input) {
+    let partition = [];
+
+    const syllablePartitioners = [
+        {
+            match: str => isCJKCharacter(str.charAt(0)) ? str.charAt(0) : '',
+            type: SyllableTypes.HANZI
+        },
+        {
+            match: str => matchNumberedPinyin(str) || '',
+            type: SyllableTypes.NUMBERED_PINYIN
+        },
+        {
+            match: str => greedyFindFlatPinyin(str) || '',
+            type: SyllableTypes.FLAT_PINYIN
+        }
+    ];
+
+    const inputAsArray = Array.from(input);
+    for (let i = 0; i < inputAsArray.length;) {
+        const substrAsArray = inputAsArray.slice(i),
+              substr = substrAsArray.join('');
+
+        const match = syllablePartitioners.some(function (partitioner) {
+            const matchedString = partitioner.match(substr);
+            
+            if (matchedString.length > 0) {
+                partition.push({
+                    string: matchedString,
+                    type: partitioner.type
+                });
+
+                return true;
+            }
+        });
+
+        if (match) {
+            i += length(partition.slice(-1)[0].string);
+        } else {
+            // Weird input. Skip a character.
+            i += 1;
+        }
+    }
+
+    return partition;
+}
+
+export function getTone(syllable) {
+    if (!syllable) { return undefined; }
+
+    return parseInt(syllable.charAt(syllable.length - 1), 10);
 }
