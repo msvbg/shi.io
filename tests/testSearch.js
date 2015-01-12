@@ -1,7 +1,5 @@
-jest.dontMock('../app/server/chinese.js');
-jest.dontMock('../app/server/search.js');
+jest.autoMockOff();
 
-import '6to5/polyfill';
 import {classifyQuery, QueryTypes} from '../app/server/search';
 
 describe('classifySearch', function () {
