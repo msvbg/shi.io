@@ -9,6 +9,8 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     concat = require('gulp-concat'),
     reactify = require('reactify');
+    jshint = require('gulp-jshint'),
+    jshintStylish = require('jshint-stylish');
 
 var paths = {
     public: './public',
@@ -44,6 +46,13 @@ gulp.task('buildScripts', function () {
         .pipe(gulp.dest(paths.public)));
 });
 
+gulp.task('lintScripts', function () {
+    return gulp.src(paths.scripts)
+        .pipe(react())
+        .pipe(jshint({ esnext: true }))
+        .pipe(jshint.reporter(jshintStylish));
+});
+
 gulp.task('reloadStyles', ['buildStyles'], doReload);
 gulp.task('buildStyles', function () {
     return gulp.src(paths.mainStyle)
@@ -73,14 +82,14 @@ gulp.task('default', [
 
     var watch = function (what) {
         what.forEach(function (each) {
-            gulp.watch(each.dir, [each.action]);
+            gulp.watch(each.dir, each.action);
         });
     };
   
     watch([
-        { dir: paths.index, action: 'reloadIndex' },
-        { dir: paths.scripts, action: 'reloadScripts' },
-        { dir: paths.styles, action: 'reloadStyles' },
+        { dir: paths.index, action: ['reloadIndex'] },
+        { dir: paths.scripts, action: ['reloadScripts', 'lintScripts'] },
+        { dir: paths.styles, action: ['reloadStyles'] },
     ]);
 
 });
