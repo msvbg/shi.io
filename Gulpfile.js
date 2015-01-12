@@ -49,7 +49,7 @@ gulp.task('buildStyles', function () {
     return gulp.src(paths.mainStyle)
         .pipe(sass({
             errLogToConsole: true,
-            includePaths: ['./bower_components/']
+            includePaths: ['./node_modules/']
         }))
         .pipe(autoprefix())
         .pipe(rename(function (path) {
