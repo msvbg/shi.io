@@ -57,7 +57,7 @@ gulp.task('buildStyles', function () {
     return gulp.src(paths.mainStyle)
         .pipe(sass({
             errLogToConsole: true,
-            includePaths: ['./node_modules/']
+            includePaths: ['./bower_components/']
         }))
         .pipe(autoprefix())
         .pipe(rename(function (path) {
