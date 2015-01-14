@@ -257,12 +257,8 @@ export function smartPartition (input) {
         }
     ];
 
-    const inputAsArray = Array.from(input);
-    for (let i = 0; i < inputAsArray.length;) {
-        const substrAsArray = inputAsArray.slice(i),
-              substr = substrAsArray.join('');
-
-        const match = syllablePartitioners.some(function (partitioner) {
+    function isMatch(substr) {
+        return function (partitioner) {
             const matchedString = partitioner.match(substr);
             
             if (matchedString.length > 0) {
@@ -273,7 +269,15 @@ export function smartPartition (input) {
 
                 return true;
             }
-        });
+        };
+    }
+
+    const inputAsArray = Array.from(input);
+    for (let i = 0; i < inputAsArray.length;) {
+        const substrAsArray = inputAsArray.slice(i),
+              substr = substrAsArray.join('');
+
+        const match = syllablePartitioners.some(isMatch(substr));
 
         if (match) {
             i += length(partition.slice(-1)[0].string);
