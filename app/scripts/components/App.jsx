@@ -1,7 +1,7 @@
 import React from 'react';
-import SearchResultStore from '../stores/SearchResultStore.js';
-import Header from './Header.jsx';
-import SearchResults from './SearchResults.jsx';
+import SearchResultStore from '../stores/search_result_store.js';
+import Header from './header.jsx';
+import SearchResults from './search_results.jsx';
 
 export default React.createClass({
     render: function () {

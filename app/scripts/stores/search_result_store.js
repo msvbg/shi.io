@@ -1,7 +1,7 @@
 import EventEmitter from 'events';
 import assign from 'object-assign';
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import Actions from '../constants/ActionConstants.js';
+import AppDispatcher from '../dispatcher/app_dispatcher.js';
+import Actions from '../constants/action_constants.js';
 import $ from 'jquery';
 
 let entries = [

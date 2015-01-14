@@ -1,5 +1,5 @@
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import ActionConstants from '../constants/ActionConstants.js';
+import AppDispatcher from '../dispatcher/app_dispatcher.js';
+import ActionConstants from '../constants/action_constants.js';
 
 export default {
     search: function (query) {

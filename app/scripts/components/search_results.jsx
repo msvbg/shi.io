@@ -1,6 +1,6 @@
 import React from 'react';
-import Definitions from './Definitions.jsx';
-import SearchResultStore from '../stores/SearchResultStore.js';
+import Definitions from './definitions.jsx';
+import SearchResultStore from '../stores/search_result_store.js';
 
 export default React.createClass({
     getInitialState: function () {

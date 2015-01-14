@@ -1,6 +1,6 @@
 jest.autoMockOff();
 
-import util from '../app/common/utilities';
+import util from './common/utilities.js';
 
 describe('stringSlice', function () {
     it('behaves like String.prototype.slice', function () {
