@@ -1,5 +1,0 @@
-{
-  "testDirectoryName": "tests",
-  "scriptPreprocessor": "./node_modules/6to5-jest",
-  "setupTestFrameworkScriptFile": "./config/test_setup.js"
-}
