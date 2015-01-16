@@ -11,7 +11,8 @@ var gulp = require('gulp'),
     reactify = require('reactify'),
     jshint = require('gulp-jshint'),
     react = require('gulp-react'),
-    jshintStylish = require('jshint-stylish');
+    jshintStylish = require('jshint-stylish'),
+    to5ify = require('6to5ify');
 
 var paths = {
     public: './public',
@@ -34,12 +35,10 @@ gulp.task('reloadScripts', ['buildScripts'], doReload);
 gulp.task('buildScripts', function () {
     return (
         browserify({
-            files: es6ify.runtime,
             debug: true
         })
         .add(paths.mainScript)
-        .transform(reactify)
-        .transform(es6ify.configure(/.(js|jsx)/))
+        .transform(to5ify)
         .bundle().on('error', continueOnError)
         .pipe(source('scripts/app.js'))
         .pipe(gulp.dest(paths.public)));

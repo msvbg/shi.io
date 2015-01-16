@@ -1,8 +1,8 @@
 jest.autoMockOff();
 
-import ColorizedPinyin from './scripts/components/colorized_pinyin.jsx';
-import React from 'react';
 import 'react/addons';
+import ColorizedPinyin from 'app/scripts/components/colorized_pinyin.jsx';
+import React from 'react';
 
 let TestUtils = React.addons.TestUtils;
 

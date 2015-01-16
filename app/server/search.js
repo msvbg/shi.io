@@ -1,5 +1,5 @@
 import keymirror from 'keymirror';
-import chinese from './chinese';
+import chinese from 'app/common/chinese.js';
 
 export let QueryTypes = keymirror({
     CHINESE_TO_L1: null,

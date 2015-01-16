@@ -1,6 +1,6 @@
 jest.autoMockOff();
 
-import chinese from './server/chinese.js';
+import chinese from 'app/common/chinese.js';
 import R from 'ramda';
 
 describe('isCJKCharacter', function () {

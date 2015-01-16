@@ -1,6 +1,7 @@
 import React from 'react';
-import Definitions from './definitions.jsx';
-import SearchResultStore from '../stores/search_result_store.js';
+import Definitions from 'app/scripts/components/definitions.jsx';
+import SearchResultStore from 'app/scripts/stores/search_result_store.js';
+import ColorizedPinyin from 'app/scripts/components/colorized_pinyin.jsx';
 
 export default React.createClass({
     getInitialState: function () {

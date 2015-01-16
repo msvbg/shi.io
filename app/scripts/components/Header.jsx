@@ -1,5 +1,5 @@
 import React from 'react';
-import Actions from '../actions/actions.js';
+import Actions from 'app/scripts/actions/actions.js';
 
 export default React.createClass({
     getInitialState: function () {

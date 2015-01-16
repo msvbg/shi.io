@@ -1,6 +1,6 @@
 jest.autoMockOff();
 
-import {classifyQuery, QueryTypes} from './server/search.js';
+import {classifyQuery, QueryTypes} from 'app/server/search.js';
 
 describe('classifySearch', function () {
     it('identifies Chinese queries as Chinese-L1', function () {
