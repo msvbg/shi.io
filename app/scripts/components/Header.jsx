@@ -4,7 +4,7 @@ import Actions from 'app/scripts/actions/actions.js';
 export default React.createClass({
     getInitialState: function () {
         return {
-            query: "Search query"
+            query: "fang"
         };
     },
     render: function () {

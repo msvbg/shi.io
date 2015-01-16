@@ -17,7 +17,10 @@ export default React.createClass({
             result => 
                 <li key={result.id}
                     className="search-results-item">
-                    <h2 className="search-results-item-headword">{result.headword}</h2>
+                    <div className="search-results-item-header">
+                        <h2 className="search-results-item-headword">{result.headword}</h2>
+                        <ColorizedPinyin pinyin={result.pinyin} />
+                    </div>
                     <div className="search-results-item-content">
                         <Definitions definitions={result.definitions} />
                     </div>

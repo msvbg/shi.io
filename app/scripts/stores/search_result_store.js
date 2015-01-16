@@ -58,6 +58,7 @@ AppDispatcher.register(function (payload) {
       return {
         id: n,
         headword: x.headword,
+        pinyin: x.pinyin,
         definitions: [{ index: 1, lang: "en", text: x.definitions }]
       };
     });

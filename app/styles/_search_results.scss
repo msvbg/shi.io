@@ -9,11 +9,16 @@
     margin-bottom: 10px;
 }
 
-.search-results-item-headword {
+.search-results-item-header {
     font-size: 18px;
     background: #eee;
     padding: 10px;
     margin: 0;
+}
+
+.search-results-item-headword {
+    display: inline-block;
+    margin-right: 10px;
 }
 
 .search-results-item-content {

@@ -1,10 +1,4 @@
 import pg from 'pg';
-import pgHstoreFactory from 'pg-hstore';
-
-const pgHstore = pgHstoreFactory();
-
-const hstoreOid = 16507;
-pg.types.setTypeParser(hstoreOid, (val) => pgHstore.parse(val));
 
 const connectionString = 'postgres://martin:@localhost/shi_io';
 
@@ -28,13 +22,10 @@ function queryDatabase(query, parameters = []) {
 export function search (query) {
     return queryDatabase(
         `SELECT
-            id, headword_traditional AS headword, pinyin, definitions,
-            ARRAY[1,2,3] AS arr, '"a"=>"b"'::hstore AS hs
+            id, headword_traditional AS headword, pinyin, definitions
         FROM entry
         WHERE pinyin LIKE '%' || $1 || '%'
         LIMIT 20`,
         [query])
-    .then((result) =>
-        result.rows.map((row) =>
-            row))
+    .then((result) => result.rows);
 }
