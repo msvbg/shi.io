@@ -1,7 +1,7 @@
 import R from 'ramda';
 import length from 'string-length';
 import keymirror from 'keymirror';
-import {stringSlice} from './common/utilities.js';
+import {stringSlice} from 'app/common/utilities.js';
 
 const CJK_RANGES = [
     [0x4E00, 0x9FFF],
