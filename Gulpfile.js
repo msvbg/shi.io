@@ -18,7 +18,7 @@ var paths = {
     public: './public',
 
     index: './app/index.html',
-    mainScript: './app/scripts/main.jsx',
+    mainScript: './app/main.jsx',
     mainStyle: './app/styles/main.scss',
 
     styles: './app/**/*.scss',
