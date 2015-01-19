@@ -1,4 +1,4 @@
-import api from './api';
+import api from 'app/server/api';
 import express from 'express';
 import compression from 'compression';
 import bodyParser from 'body-parser';
