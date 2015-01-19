@@ -30,3 +30,22 @@
         outline: 0;
     }
 }
+
+.login-switch {
+    display: inline-block;
+    padding: 10px;
+}
+
+.login-switch-link {
+    color: #444;
+    border: 0;
+    background: none;
+
+    &:focus {
+        outline: 0;
+    }
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
