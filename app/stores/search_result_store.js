@@ -39,7 +39,7 @@ const debouncedSearch = debounce(function (query) {
                     id: n,
                     headword: x.headword,
                     pinyin: x.pinyin,
-                    definitions: [{ index: 1, lang: "en", text: x.definitions }]
+                    definitions: x.definitions
                 };
             });
             SearchResultStore.emitChange();

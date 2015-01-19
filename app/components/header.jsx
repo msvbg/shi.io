@@ -14,12 +14,13 @@ export default React.createClass({
     render: function () {
         return (
             <header className="page-header">
-                <h1 className="page-header-logo">shi.io</h1>
+                <div className="page-header-looking-glass" />
                 <input
                     className="page-header-search"
                     type="search"
                     onChange={this._onSearch}
                     value={this.state.query}
+                    placeholder="shi1 zi, 狮子, lion…"
                     autoFocus />
                 <LoginSwitch />
             </header>

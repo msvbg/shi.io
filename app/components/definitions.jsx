@@ -3,20 +3,17 @@ import R from 'ramda';
 
 export default React.createClass({
     render: function () {
-        let english = R.pipe(
-            R.filter(R.where({ lang: 'en' })),
-            R.head);
+        let english = R.pluck('en');
 
         let definitions =
-            this.props.definitions
-            //.map(english)
-            .map(definition =>
+            english(this.props.definitions)
+            .map((definition, index) =>
                 <li className="definition-list-item"
-                    key={definition.index}>{definition.text}</li>
+                    key={index}>{definition}</li>
             );
 
         return (
-            <ul className="definition-list">{definitions}</ul>
+            <ol className="definition-list">{definitions}</ol>
         );
     }
 });
