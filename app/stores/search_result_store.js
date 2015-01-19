@@ -2,70 +2,55 @@ import EventEmitter from 'events';
 import assign from 'object-assign';
 import AppDispatcher from '../dispatcher/app_dispatcher.js';
 import Actions from '../constants/action_constants.js';
-import $ from 'jquery';
+import request from 'superagent';
+import debounce from 'debounce';
 
-let entries = [
-    {
-        id: 1,
-        headword: "苹果",
-        definitions: [
-            [ { index: 1, lang: "en", text: "Apple" } ],
-        ]
-    },
-    {
-        id: 2,
-        headword: "橙子",
-        definitions: [
-            [ { index: 1, lang: "en", text: "Orange" } ],
-        ]
-    }
-];
-
+let entries = [];
 let query = "";
 
 let CHANGE_EVENT = 1;
 
 let SearchResultStore = assign({}, EventEmitter.prototype, {
+    getSearchResults: function () {
+        return entries;
+    },
 
-  getSearchResults: function () {
-    if (query === "Hi") {
-        return entries;
-    } else {
-        return entries;
+    emitChange: function() {
+        this.emit(CHANGE_EVENT);
+    },
+
+    addChangeListener: function(callback) {
+        this.on(CHANGE_EVENT, callback);
+    },
+
+    removeChangeListener: function(callback) {
+        this.removeListener(CHANGE_EVENT, callback);
     }
-  },
-
-  emitChange: function() {
-    this.emit(CHANGE_EVENT);
-  },
-
-  addChangeListener: function(callback) {
-    this.on(CHANGE_EVENT, callback);
-  },
-
-  removeChangeListener: function(callback) {
-    this.removeListener(CHANGE_EVENT, callback);
-  }
 });
 
+// Debounce search requests so as to not needlessly spam server
+const searchDebounceDelay = 200;
+const debouncedSearch = debounce(function (query) {
+    request
+        .get('/api/search?query=' + query)
+        .end(function (error, response) {
+            entries = response.body.map(function (x, n) {
+                return {
+                    id: n,
+                    headword: x.headword,
+                    pinyin: x.pinyin,
+                    definitions: [{ index: 1, lang: "en", text: x.definitions }]
+                };
+            });
+            SearchResultStore.emitChange();
+        });
+}, searchDebounceDelay);
+
 AppDispatcher.register(function (payload) {
-  query = payload.action.query;
+    query = payload.action.query;
+    debouncedSearch(query);
 
-  $.get('/api/search?query='+query, function (result) {
-    var n = 0;
-    entries = result.map(function (x) {
-      n += 1;
-      return {
-        id: n,
-        headword: x.headword,
-        pinyin: x.pinyin,
-        definitions: [{ index: 1, lang: "en", text: x.definitions }]
-      };
-    });
-    SearchResultStore.emitChange();
-  });
-
-  return true;
+    return true;
 });
 
 export default SearchResultStore;
