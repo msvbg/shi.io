@@ -1,5 +1,6 @@
 import pg from 'pg';
 import authentication from 'app/server/authentication.js';
+import keymirror from 'keymirror';
 
 const connectionString = 'postgres://martin:@localhost/shi_io';
 
@@ -46,8 +47,17 @@ export function authenticate(email, password) {
               password_salt: salt } = result.rows[0];
 
         return authentication.validatePassword(password, hash, salt);
-    })
-    .catch(error => {
-        console.log(error);
     });
+}
+
+export const ErrorTypes = keymirror({
+    AUTHENTICATION_ERROR: null
+});
+
+export function success(data) {
+    return data;
+}
+
+export function error(type, error) {
+    return { type, message: error.message };
 }

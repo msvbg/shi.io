@@ -17,7 +17,7 @@ export function validatePassword(password, hash, salt) {
             if (valid) {
                 fulfill();
             } else {
-                reject();
+                reject(new Error("Invalid password."));
             }
         });
     });
