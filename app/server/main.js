@@ -26,8 +26,14 @@ app.post('/api/authenticate', function (req, res) {
         password = req.body.password;
 
     api.authenticate(email, password)
-        .then((result) => res.json({ valid: true }))
-        .catch((result) => res.json({ valid: false }));
+        .then(
+            (result) => res.json(
+                api.success(
+                    { valid: true })),
+            (error) => res.status(403).json(
+                api.error(
+                    api.ErrorTypes.AUTHENTICATION_ERROR,
+                    error)));
 });
 
 let server = app.listen(1534, function () {
