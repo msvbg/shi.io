@@ -36,7 +36,7 @@ $pageHeaderContentHeight: $pageHeaderHeight - 2 * $pageHeaderPadding;
     height: $pageHeaderContentHeight;
     vertical-align: top;
     border: none;
-    font-family: "Noto Sans";
+    font-family: "adelle-sans";
     font-size: 30px;
     color: #444;
 
@@ -52,6 +52,7 @@ $pageHeaderContentHeight: $pageHeaderHeight - 2 * $pageHeaderPadding;
 
 .login-switch-link {
     color: $color-text-main;
+    font-family: "adelle-sans";
     border: 0;
     background: none;
     padding: 0;

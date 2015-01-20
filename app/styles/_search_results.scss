@@ -4,9 +4,34 @@
     margin: 0;
 }
 
+.search-results.side {
+    display: inline-block;
+    width: 400px;
+    border-right: 1px solid $color-border;
+}
+
 .search-results-item {
     border-bottom: 1px solid #eee;
     border-bottom: 1px solid $color-border;
+
+    .definition-list,
+    .definition-list-item,
+    .search-results-item-header,
+    .search-results-item-content {
+        cursor: pointer;
+    }
+}
+
+.search-results-item.selected {
+    background: #3C73AC;
+
+    .search-results-item-header {
+        color: #fafafa;
+    }
+
+    .definition-list-item {
+        color: #fafafa;
+    }
 }
 
 .search-results-item-header {
@@ -17,14 +42,27 @@
 }
 
 .search-results-item-headword {
+    @extend .selectable;
+
     display: inline-block;
     margin-right: 10px;
+    margin-bottom: 0;
+
+    font-family: "Noto Sans CJK TC";
+    font-weight: 100;
+}
+
+.search-results-item-pronunciation {
+    span { @extend .selectable; }
+
+    font-family: "adelle-sans";
+    font-size: 26px;
+    font-weight: 100;
 }
 
 .search-results-item-content {
     padding: 20px;
     padding-top: 0;
-    background: #fff;
 }
 
 .definition-list {
@@ -32,5 +70,9 @@
 }
 
 .definition-list-item {
+    @extend .selectable;
     color: $color-text-main;
+    font-family: "adelle-sans";
+    font-size: 20px;
+    font-weight: 100;
 }
