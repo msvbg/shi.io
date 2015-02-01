@@ -23,6 +23,7 @@ var paths = {
 
     styles: './app/**/*.scss',
     scripts: './app/**/*.{js,jsx}',
+    images: './app/**/*.{png,jpg,svg}'
 };
 
 var continueOnError = function (err) {
@@ -69,12 +70,18 @@ gulp.task('reloadIndex', ['buildIndex'], doReload);
 gulp.task('buildIndex', function () {
     return gulp.src(paths.index)
         .pipe(gulp.dest(paths.public));
-})
+});
+
+gulp.task('buildImages', function () {
+    return gulp.src(paths.images)
+        .pipe(gulp.dest(paths.public));
+});
 
 gulp.task('default', [
     'buildIndex',
     'buildScripts',
-    'buildStyles'], function () {
+    'buildStyles',
+    'buildImages'], function () {
 
     livereload.listen();
 
@@ -86,7 +93,7 @@ gulp.task('default', [
   
     watch([
         { dir: paths.index, action: ['reloadIndex'] },
-        { dir: paths.scripts, action: ['reloadScripts', 'lintScripts'] },
+        { dir: paths.scripts, action: ['reloadScripts'] },
         { dir: paths.styles, action: ['reloadStyles'] },
     ]);
 
