@@ -11,6 +11,8 @@ app.use(bodyParser.json());
 
 app.get('/api/search', function (req, res) {
     let searchQuery = req.query.query;
+
+    if (!searchQuery) { return res.json([]); }
     
     api.search(searchQuery)
         .then(function (result) {
