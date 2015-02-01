@@ -19,6 +19,6 @@ export default React.createClass({
             <span key={s.index} className={s.className}>{s.text}</span>
         );
 
-        return <span>{colorizedSyllables}</span>;
+        return <span className="colorized-pinyin">{colorizedSyllables}</span>;
     }
 });

@@ -1,3 +1,8 @@
+.colorized-pinyin {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .colorized-pinyin-syllable {
     margin-right: 5px;
 }
@@ -7,13 +12,13 @@
 }
 
 .colorized-pinyin-syllable.tone-2 {
-    color: #FFD000;
+    color: #FABC00;
 }
 
 .colorized-pinyin-syllable.tone-3 {
-    color: #3D9970;
+    color: #45D193;
 }
 
 .colorized-pinyin-syllable.tone-4 {
-    color: #0074D9;
+    color: #5CABF0;
 }
