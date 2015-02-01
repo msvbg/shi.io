@@ -4,32 +4,25 @@ import AppDispatcher from '../dispatcher/app_dispatcher.js';
 import Actions from '../constants/action_constants.js';
 import request from 'superagent';
 import debounce from 'debounce';
+import keymirror from 'keymirror';
 
 let entries = [];
+let selectedEntry = null;
 let query = "";
 
-let CHANGE_EVENT = 1;
+export const SearchResultEvents = keymirror({
+    CHANGE_SEARCH_RESULTS: null,
+    CHANGE_VIEWED_SEARCH_RESULT: null
+});
 
-let SearchResultStore = assign({}, EventEmitter.prototype, {
+export let SearchResultStore = assign({}, EventEmitter.prototype, {
     getSearchResults: function () {
         return entries;
-    },
-
-    emitChange: function() {
-        this.emit(CHANGE_EVENT);
-    },
-
-    addChangeListener: function(callback) {
-        this.on(CHANGE_EVENT, callback);
-    },
-
-    removeChangeListener: function(callback) {
-        this.removeListener(CHANGE_EVENT, callback);
     }
 });
 
 // Debounce search requests so as to not needlessly spam server
-const searchDebounceDelay = 200;
+const searchDebounceDelay = 0;
 const debouncedSearch = debounce(function (query) {
     request
         .get('/api/search?query=' + query)
@@ -42,13 +35,21 @@ const debouncedSearch = debounce(function (query) {
                     definitions: x.definitions
                 };
             });
-            SearchResultStore.emitChange();
+            SearchResultStore.emit(SearchResultEvents.SEARCH_RESULTS_CHANGED);
         });
 }, searchDebounceDelay);
 
 AppDispatcher.register(function (payload) {
-    query = payload.action.query;
-    debouncedSearch(query);
+    switch (payload.action.type) {
+    case Actions.SEARCH:
+        query = payload.action.query;
+        debouncedSearch(query);
+        break;
+
+    case Actions.CHANGE_VIEWED_SEARCH_RESULT:
+        SearchResultStore.emit(SearchResultEvents.VIEWED_SEARCH_RESULT_CHANGED);
+        break;
+    }
 
     return true;
 });

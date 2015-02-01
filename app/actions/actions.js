@@ -4,8 +4,15 @@ import ActionConstants from '../constants/action_constants.js';
 export default {
     search: function (query) {
         AppDispatcher.handleViewAction({
-            action: ActionConstants.SEARCH,
+            type: ActionConstants.SEARCH,
             query: query
+        });
+    },
+
+    changeViewedSearchResult: function (searchResult) {
+        AppDispatcher.handleViewAction({
+            type: ActionConstants.CHANGE_VIEWED_SEARCH_RESULT,
+            searchResult: searchResult
         });
     }
 };
