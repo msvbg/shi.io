@@ -6,8 +6,12 @@
 }
 
 .tab-view-tab {
+    border-bottom: 2px solid transparent;
+
     display: inline-block;
-    padding: 20px;
+    margin: 30px 16px;
+    padding-left: 2px;
+    padding-right: 2px;
     cursor: pointer;
 
     font-family: "adelle-sans";
@@ -15,8 +19,13 @@
     font-size: 12px;
     letter-spacing: 2px;
     text-transform: uppercase;
+
+    &:hover {
+        border-bottom: 2px solid #3C73AC;
+    }
 }
 
 .tab-view-tab.selected {
     color: #3C73AC;
+    border-bottom: 2px solid #3C73AC;
 }

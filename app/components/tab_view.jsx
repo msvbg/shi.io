@@ -2,18 +2,28 @@ import React from 'react';
 import R from 'ramda';
 
 export let TabView = React.createClass({
+    getInitialState: function () {
+        return { selectedTabLabel: null };
+    },
     componentWillMount: function () {
         this.setState({
-            selectedTab: R.head(this.props.children)
+            selectedTabLabel: R.head(this.props.children).props.label
+        });
+    },
+    componentWillReceiveProps: function () {
+        this.setState({
+            selectedTabLabel: R.head(this.props.children).props.label
         });
     },
     render: function () {
         const tabs = this.props.children.map((child) => {
-            const isSelected = (
-                this.state.selectedTab.props.label === child.props.label);
+            const selectedTabLabel = this.state.selectedTabLabel;
+            const childLabel = child.props.label;
+            const isSelected = (childLabel === selectedTabLabel);
 
             return (
                 <Tab
+                    key={child.props.label}
                     label={child.props.label}
                     onClick={this._onClick}
                     tabPanel={child}
@@ -21,17 +31,21 @@ export let TabView = React.createClass({
             );
         });
 
+        const selectedPanel = R.find(
+            (panel) => panel.props.label === this.state.selectedTabLabel,
+            this.props.children);
+
         return (
             <div className="tab-view">
                 <ul className="tab-view-tabs">{tabs}</ul>
-                <div>{this.state.selectedTab}</div>
+                <div>{selectedPanel}</div>
             </div>
         );
     },
 
     _onClick: function (tab) {
         this.setState({
-            selectedTab: tab.props.tabPanel
+            selectedTabLabel: tab.props.tabPanel.props.label
         });
     }
 });
@@ -55,6 +69,6 @@ export let Tab = React.createClass({
 
 export let TabPanel = React.createClass({
     render: function () {
-        return <div>{this.props.children}</div>;
+        return <div className="tab-panel">{this.props.children}</div>;
     }
 });

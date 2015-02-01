@@ -1,36 +1,61 @@
 import React from 'react';
 import Actions from 'app/actions/actions.js';
 import LoginSwitch from 'app/components/login_switch.jsx';
+import {default as Router, Navigation} from 'react-router';
+import debounce from 'debounce';
 
 export default React.createClass({
+    mixins: [Navigation, Router.State],
+    propTypes: {
+        expanded: React.PropTypes.bool.isRequired
+    },
     getInitialState: function () {
+        const queryParams = this.getQuery();
         return {
-            query: "fang"
+            query: queryParams.query
         };
     },
     componentDidMount: function () {
         Actions.search(this.state.query);
     },
     render: function () {
+        const className = React.addons.classSet({
+            'page-header': true,
+            'expanded': this.props.expanded,
+            'not-expanded': !this.props.expanded
+        });
+
         return (
-            <header className="page-header">
-                <div className="page-header-looking-glass" />
-                <input
-                    className="page-header-search"
-                    type="search"
-                    onChange={this._onSearch}
-                    value={this.state.query}
-                    placeholder="shi1 zi, 狮子, lion…"
-                    autoFocus />
-                <LoginSwitch />
+            <header className={className}>
+                <div className="page-header-search-bar">
+                    <div className="page-header-looking-glass" />
+                    <input
+                        className="page-header-search"
+                        type="search"
+                        onChange={this._onType}
+                        onKeyUp={this._onSearch}
+                        value={this.state.query}
+                        placeholder="shi1 zi, 狮子, lion…"
+                        autoFocus />
+                    {this.props.expanded ? <LoginSwitch /> : null}
+                </div>
             </header>
         );
     },
 
-    _onSearch: function (event) {
-        let query = event.target.value;
-
+    _onType: function (event) {
+        const query = event.target.value;
         this.setState({ query: query });
-        Actions.search(query);
+    },
+
+    _onSearch: function (event) {
+        if (event.keyCode === 13) {
+            console.log(this.state.query);
+            Actions.search(this.state.query);
+            this.transitionTo(`/search?query=${this.state.query}`);
+        }
+    },
+
+    _changeSearchRoute: function () {
     }
 });

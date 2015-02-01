@@ -1,33 +1,80 @@
 $pageHeaderHeight: 120px;
 $pageHeaderPadding: 20px;
 $pageHeaderContentHeight: $pageHeaderHeight - 2 * $pageHeaderPadding;
+$logoHeight: 160px;
+
+.app-container {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transition: .4s ease-out;
+}
+
+.app-container {
+    position: relative;
+    transform: translateY(0%);
+    margin: 0 auto;
+}
+
+.app-container.not-centered {
+    min-height: 100%;
+}
+
+.app-container.centered {
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    transform: translateY(300px);
+}
 
 .page-header {
     position: relative;
+    z-index: 100;
     display: flex;
+    flex-direction: column;
     width: 100%;
-    height: $pageHeaderHeight;
-    padding: $pageHeaderPadding;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .page-header-logo {
-    float: left;
-    margin: 0;
-    margin-right: 10px;
-    color: #444;
-    font-family: 'Noto Sans';
-    font-size: 30px;
-    line-height: $pageHeaderContentHeight;
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    height: $logoHeight;
+    margin-top: 80px;
+    margin-bottom: 40px;
+    margin-left: -80px;
+    transition: opacity .2s ease-in;
+}
+
+.page-header-logo.not-visible {
+    opacity: 0;
+}
+
+.page-header-logo.visible {
+    opacity: 1;
+}
+
+.page-header-search-bar {
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
+                //0px 6px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #f5f5f5;
+    background: white;
+    height: $pageHeaderHeight;
+    padding: $pageHeaderPadding;
+    display: flex;
 }
 
 .page-header-looking-glass {
+    box-sizing: content-box;
     display: inline-block;
-    background: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 31" xmlns="http://www.w3.org/2000/svg"><title>Oval 1 + Line</title><g fill="none" fill-rule="evenodd"><g transform="translate(1 1)" stroke="#ccc" stroke-width="2"><circle cx="11" cy="11" r="11"/><path d="M18.393 19.393L27 28" stroke-linecap="square"/></g></g></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 31" xmlns="http://www.w3.org/2000/svg"><title>Oval 1 + Line</title><g fill="none" fill-rule="evenodd"><g transform="translate(1 1)" stroke="#ccc" stroke-width="2"><circle cx="11" cy="11" r="11"/><path d="M18.393 19.393L27 28" stroke-linecap="square"/></g></g></svg>');
     background-repeat: no-repeat;
+    background-color: white;
+    background-position: center;
     width: 30px;
     height: 30px;
-    margin: ($pageHeaderContentHeight / 2) - 15px;
+    padding: ($pageHeaderContentHeight / 2) - 15px;
 }
 
 .page-header-search {
@@ -38,11 +85,19 @@ $pageHeaderContentHeight: $pageHeaderHeight - 2 * $pageHeaderPadding;
     border: none;
     font-family: "adelle-sans";
     font-size: 30px;
-    color: #444;
+    color: #df2e1c;
+
+    &::selection {
+      background: #ffb7b7;
+    }
 
     &:focus {
         outline: 0;
     }
+}
+
+.page-header.not-expanded > .login-switch {
+    display: none;
 }
 
 .login-switch {

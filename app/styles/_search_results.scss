@@ -1,4 +1,17 @@
+.search-results-container {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+
+    > .entry-view {
+        flex: 1;
+        position: relative;
+        box-shadow: -3px 3px 3px rgba(0,0,0,.1)
+    }
+}
+
 .search-results {
+    width: 100%;
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -7,30 +20,31 @@
 .search-results.side {
     display: inline-block;
     width: 400px;
-    border-right: 1px solid $color-border;
+    background: rgba(238, 243, 249, 0.64);
 }
 
 .search-results-item {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid $color-border;
     border-bottom: 1px solid $color-border;
 
-    .definition-list,
-    .definition-list-item,
-    .search-results-item-header,
-    .search-results-item-content {
-        cursor: pointer;
+    * { cursor: pointer; }
+
+    &.selected {
+        border-right: none;
+        z-index: 2;
+        position: relative;
+        background: lighten($color-highlight, 50%);
+        background: white;
+        box-shadow: -3px 3px 3px rgba(0,0,0,.1)
     }
 }
 
-.search-results-item.selected {
-    background: #3C73AC;
+.search-results-item:hover {
+    //background: $color-highlight;
 
-    .search-results-item-header {
-        color: #fafafa;
-    }
-
+    .search-results-item-header,
     .definition-list-item {
-        color: #fafafa;
+        //color: #eee;
     }
 }
 
@@ -42,8 +56,6 @@
 }
 
 .search-results-item-headword {
-    @extend .selectable;
-
     display: inline-block;
     margin-right: 10px;
     margin-bottom: 0;
@@ -53,8 +65,6 @@
 }
 
 .search-results-item-pronunciation {
-    span { @extend .selectable; }
-
     font-family: "adelle-sans";
     font-size: 26px;
     font-weight: 100;
@@ -70,7 +80,6 @@
 }
 
 .definition-list-item {
-    @extend .selectable;
     color: $color-text-main;
     font-family: "adelle-sans";
     font-size: 20px;
