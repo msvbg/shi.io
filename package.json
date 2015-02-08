@@ -49,11 +49,14 @@
     "react-tools": "^0.12.2",
     "reactify": "^0.17.1",
     "string-length": "^1.0.0",
-    "superagent": "^0.21.0"
+    "superagent": "^0.21.0",
+    "velocity-animate": "^1.2.1"
   },
   "jest": {
     "testDirectoryName": "tests",
     "scriptPreprocessor": "./node_modules/6to5-jest",
-    "setupEnvScriptFile": "./config/test_setup.js"
+    "setupEnvScriptFile": "./config/setup_test_env.js",
+    "setupTestFrameworkScriptFile": "./config/setup_test_framework.js",
+    "testPathIgnorePatterns": ["node_modules", "tests/mocks"]
   }
 }
