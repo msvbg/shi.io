@@ -14,15 +14,7 @@
     padding-right: 2px;
     cursor: pointer;
 
-    font-family: "adelle-sans";
-    font-weight: 500;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-
-    &:hover {
-        border-bottom: 2px solid #3C73AC;
-    }
+    @extend .header-2;
 }
 
 .tab-view-tab.selected {

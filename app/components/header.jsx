@@ -50,7 +50,6 @@ export default React.createClass({
 
     _onSearch: function (event) {
         if (event.keyCode === 13) {
-            console.log(this.state.query);
             Actions.search(this.state.query);
             this.transitionTo(`/search?query=${this.state.query}`);
         }
