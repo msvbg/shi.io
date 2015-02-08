@@ -24,7 +24,11 @@ function queryDatabase(query, parameters = []) {
 export function search(query) {
     return queryDatabase(
         `SELECT
-             id, headword_traditional AS headword, pinyin, definitions
+             id,
+             headword_traditional AS headword,
+             pinyin,
+             definitions,
+             sentences
          FROM entry
          WHERE pinyin LIKE '%' || $1 || '%'
          LIMIT 20`,
