@@ -1,4 +1,5 @@
 .entry-view {
+    width: 760px;
     display: inline-block;
     vertical-align: top;
 
@@ -13,22 +14,52 @@
     } 
 }
 
+.entry-view-edit-button {
+    float: right;
+    border: 0;
+    background: none;
+    box-sizing: border-box;
+
+    &:focus { outline: 0 }
+
+    display: inline-block;
+    margin: 30px 16px;
+    padding-left: 2px;
+    padding-right: 2px;
+
+    @extend .header-2;
+}
+
+.entry-view-header {
+    margin-bottom: 40px;
+}
+
 .entry-view-headword {
     font-family: "Noto Sans CJK TC";
     font-weight: 100;
     font-size: 56px;
     margin: 0;
     color: $color-text-main;
+    text-decoration: none;
+
+    &:hover:after {
+        content: "¶";
+        opacity: 0.2;
+    }
 }
 
-.entry-view-definition-list {
+.entry-view-definitions {
     @extend .definition-list;
 }
 
-.entry-view-definition-list-item {
+.entry-view-definition {
     @extend .definition-list-item;
+}
 
-    &:hover:after {
-        content: " [edit]";
-    }
+.entry-view-sentences {
+    @extend .definition-list;
+}
+
+.entry-view-sentence {
+    @extend .entry-view-definition;
 }
