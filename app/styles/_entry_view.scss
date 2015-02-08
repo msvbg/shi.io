@@ -63,3 +63,13 @@
 .entry-view-sentence {
     @extend .entry-view-definition;
 }
+
+.entry-view-characters {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.entry-view-character {
+    display: inline;
+}
