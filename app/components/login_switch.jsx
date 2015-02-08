@@ -30,6 +30,6 @@ export default React.createClass({
     },
 
     _onClickLogOut: function (event) {
-
+        this.setState({ loggedIn: false });
     }
 });

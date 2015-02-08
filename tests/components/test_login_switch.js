@@ -1,22 +1,43 @@
 jest.autoMockOff();
 
+import mockSuperagent from '../mocks/mock_superagent.js';
+jest.setMock('superagent', mockSuperagent);
+
 import 'react/addons';
 import LoginSwitch from 'app/components/login_switch.jsx';
 import React from 'react';
+import request from 'superagent';
 
 let TestUtils = React.addons.TestUtils;
 
 describe('LoginSwitch', function() {
-    it('renders a component with a single numbered pinyin syllable', function() {
-        const component = TestUtils.renderIntoDocument(
-            <ColorizedPinyin pinyin="ping2" />
-        );
+    it('sends a request to the backend when logging in', function () {
+        let loginSwitch = TestUtils.renderIntoDocument(<LoginSwitch />);
+        let loginButton = TestUtils.findRenderedDOMComponentWithTag(
+            loginSwitch, 'button');
 
-        const spans = TestUtils.scryRenderedDOMComponentsWithClass(
-            component, "colorized-pinyin-syllable"
-        );
+        expect(request.post.mock.calls)
+            .toEqual([]);
 
-        expect(spans[0].getDOMNode().className).toMatch(/tone-2/);
-        expect(spans[0].getDOMNode().textContent).toEqual('píng');
+        TestUtils.Simulate.click(loginButton);
+
+        expect(request.post.mock.calls[0][0])
+            .toEqual('/api/authenticate')
+    });
+
+    it('changes the button text when logging out', function () {
+        let loginSwitch = TestUtils.renderIntoDocument(<LoginSwitch />);
+        let logoutButton = TestUtils.findRenderedDOMComponentWithTag(
+            loginSwitch,
+            'button');
+        loginSwitch.setState({ loggedIn: true });
+
+        expect(logoutButton.getDOMNode().textContent)
+            .toEqual("Log out");
+
+        TestUtils.Simulate.click(logoutButton);
+
+        expect(logoutButton.getDOMNode().textContent)
+            .toEqual("Log in");
     });
 });
