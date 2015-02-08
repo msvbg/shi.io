@@ -21,6 +21,8 @@ export default React.createClass({
 
         // Make the entry view sticky upon scroll
         window.onscroll = this._updateEntryViewPosition;
+
+        this._animateEnter();
     },
     componentDidUpdate: function() {
         this._updateEntryViewPosition();
@@ -66,7 +68,9 @@ export default React.createClass({
                 </MediaCase>
                 <MediaCase media="(min-width: 1024px)">
                     <ul className="search-results side">{results}</ul>
-                    <EntryView ref="entryView" entry={this.state.selected}/>
+                    <EntryView
+                        ref="entryView"
+                        entry={this.state.selected} />
                 </MediaCase>
             </MediaSwitch>
         );
@@ -78,6 +82,7 @@ export default React.createClass({
             searchResults: searchResults,
             selected: R.head(searchResults)
         });
+        this._animateEnter();
     },
 
     _onClickSearchResult: function (result) {
@@ -88,7 +93,7 @@ export default React.createClass({
 
     _updateEntryViewPosition: function () {
         const selected = $(".search-results-item.selected");
-        let tabView = $(".tab-view");
+        let tabView = $(".entry-view");
 
         if (!selected.length || !tabView.length) { return; }
 
@@ -109,7 +114,20 @@ export default React.createClass({
             }
         } else {
             tabView.css("position", "absolute");
-            tabView.css("top", selectedRelY);
+            tabView.css("top", selectedY);
+        }
+    },
+
+    _animateEnter: function () {
+        let element = $(".search-results-container");
+
+        if (element) {
+            let targetHeight = element.height();
+            element.height(0);
+            element.velocity({
+                properties: { opacity: 1, height: targetHeight },
+                options: { duration: 1000 }
+            });
         }
     }
 });
