@@ -12,7 +12,7 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     react = require('gulp-react'),
     jshintStylish = require('jshint-stylish'),
-    to5ify = require('6to5ify');
+    babelify = require('babelify');
 
 var paths = {
     public: './public',
@@ -39,7 +39,7 @@ gulp.task('buildScripts', function () {
             debug: true
         })
         .add(paths.mainScript)
-        .transform(to5ify)
+        .transform(babelify)
         .bundle().on('error', continueOnError)
         .pipe(source('scripts/app.js'))
         .pipe(gulp.dest(paths.public)));
@@ -90,7 +90,7 @@ gulp.task('default', [
             gulp.watch(each.dir, each.action);
         });
     };
-  
+
     watch([
         { dir: paths.index, action: ['reloadIndex'] },
         { dir: paths.scripts, action: ['reloadScripts'] },
