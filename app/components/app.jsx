@@ -25,9 +25,9 @@ export default React.createClass({
             <div className="page-container">
                 <img src="assets/images/shi.svg" className={logoClass} />
                 <div className={appContainerClass}>
-                    <Header expanded={!isHome} />
-                    <RouteHandler />
                 </div>
+                <Header expanded={!isHome} />
+                <RouteHandler />
             </div>
         );
     }

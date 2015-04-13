@@ -4,38 +4,46 @@ $pageHeaderContentHeight: $pageHeaderHeight - 2 * $pageHeaderPadding;
 $logoHeight: 160px;
 
 .app-container {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    margin-left: -30%;
+
+    transform: none;
     background: white;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    height: $pageHeaderHeight;
     transition: .4s ease-out;
 }
 
-.app-container {
-    position: relative;
-    transform: none;
-    margin: 0 auto;
-    background: white;
-    box-shadow: 0px 3px 30px rgba(0, 0, 0, 0.1);
-}
-
 .app-container.not-centered {
-    min-height: 100%;
+    transform: scaleX(10/6) scaleY(20) translateY(0px);
 }
 
 .app-container.centered {
-    align-items: center;
-    justify-content: center;
-    width: 60%;
     transform: translateY(300px);
 }
 
 .page-header {
-    position: relative;
+    position: absolute;
+    left: 50%;
+    right: 50%;
     z-index: 100;
+    margin-left: -30%;
+    transform: translateY(300px);
+    width: 60%;
+
     display: flex;
     flex-direction: column;
+
+    transition: .4s ease-out;
+}
+
+.page-header.expanded {
+    transform: translateY(0);
     width: 100%;
+    margin-left: -50%;
 }
 
 .page-header-logo {
@@ -57,13 +65,7 @@ $logoHeight: 160px;
     opacity: 1;
 }
 
-.page-header.expanded > .page-header-search-bar {
-    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
-}
-
 .page-header-search-bar {
-                //0px 6px 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid #f5f5f5;
     background: white;
     height: $pageHeaderHeight;
     padding: $pageHeaderPadding;
