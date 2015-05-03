@@ -35,10 +35,12 @@ export default React.createClass({
             }
         }(this.props.entry.sentences);
 
+        /*
         let characters = (characters) => {
             return Array.from(characters).map((x, i) =>
-                <li className="entry-view-character">{x}</li>);
+                <li key={i} className="entry-view-character">{x}</li>);
         }(this.props.entry.headword);
+        */
 
         let generalView =
             <TabPanel label="General">
@@ -58,10 +60,12 @@ export default React.createClass({
                 <ol className="entry-view-sentences">{sentences}</ol>
             </TabPanel>;
 
+        /*
         let characterView =
             <TabPanel label="Characters">
                 <ol className="entry-view-characters">{characters}</ol>
             </TabPanel>;
+            */
 
         let historyView =
             <TabPanel label="History">
@@ -72,8 +76,7 @@ export default React.createClass({
             <div className="entry-view">
                 <button className="entry-view-edit-button">Edit</button>
                 <TabView>
-                    {generalView}                    
-                    {characterView}
+                    {generalView}
                     {historyView}
                 </TabView>
             </div>

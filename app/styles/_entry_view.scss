@@ -1,5 +1,6 @@
 .entry-view {
     width: 760px;
+    min-height: 100%;
     display: inline-block;
     vertical-align: top;
 
@@ -11,7 +12,7 @@
 
     .tab-panel {
         margin: 0 40px;
-    } 
+    }
 }
 
 .entry-view-edit-button {

@@ -1,5 +1,3 @@
-jest.autoMockOff();
-
 import 'react/addons';
 import EntryView from 'app/components/entry_view.jsx';
 import React from 'react';

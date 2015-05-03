@@ -19,14 +19,25 @@ export default React.createClass({
         Actions.search(this.state.query);
     },
     render: function () {
+        const isHome = this.isActive("home");
+
         const className = React.addons.classSet({
             'page-header': true,
             'expanded': this.props.expanded,
             'not-expanded': !this.props.expanded
         });
 
+        const logoClass = React.addons.classSet({
+            'page-header-logo': true,
+            'expanded': !isHome,
+            'not-expanded': isHome
+        });
+
         return (
             <header className={className}>
+                <div className={logoClass}>
+                    <a href="#/"><img src="assets/images/shi.svg" /></a>
+                </div>
                 <div className="page-header-search-bar">
                     <div className="page-header-looking-glass" />
                     <input

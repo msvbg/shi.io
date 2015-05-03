@@ -21,8 +21,9 @@ export default React.createClass({
 
         // Make the entry view sticky upon scroll
         window.onscroll = this._updateEntryViewPosition;
-
-        this._animateEnter();
+    },
+    componentDidUnmount: function () {
+        console.log("UNMOUNT");
     },
     componentDidUpdate: function() {
         this._updateEntryViewPosition();
@@ -40,7 +41,7 @@ export default React.createClass({
                 'selected': isSelected
             });
 
-            return ( 
+            return (
                 <li key={result.id}
                     className={className}
                     onClick={this._onClickSearchResult.bind(null, result)}>
@@ -78,11 +79,11 @@ export default React.createClass({
 
     _onChange: function () {
         const searchResults = SearchResultStore.getSearchResults();
+        console.log("ON CHANGE");
         this.setState({
             searchResults: searchResults,
             selected: R.head(searchResults)
         });
-        this._animateEnter();
     },
 
     _onClickSearchResult: function (result) {
@@ -114,20 +115,7 @@ export default React.createClass({
             }
         } else {
             tabView.css("position", "absolute");
-            tabView.css("top", selectedY);
-        }
-    },
-
-    _animateEnter: function () {
-        let element = $(".search-results-container");
-
-        if (element) {
-            let targetHeight = element.height();
-            element.height(0);
-            element.velocity({
-                properties: { opacity: 1, height: targetHeight },
-                options: { duration: 1000 }
-            });
+            tabView.css("top", selectedRelY);
         }
     }
 });

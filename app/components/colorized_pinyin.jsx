@@ -1,5 +1,5 @@
 import React from 'react';
-import chinese from 'app/common/chinese.js';
+import * as chinese from 'app/common/chinese.js';
 
 export default React.createClass({
     render: function () {

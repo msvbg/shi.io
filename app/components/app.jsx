@@ -9,25 +9,23 @@ export default React.createClass({
     render: function () {
         const isHome = this.isActive("home");
 
-        const appContainerClass = React.addons.classSet({
-            'app-container': true,
+        const backgroundCoverClass = React.addons.classSet({
+            'background-cover': true,
             'centered': isHome,
             'not-centered': !isHome
         });
 
-        const logoClass = React.addons.classSet({
-            'page-header-logo': true,
-            'visible': isHome,
-            'not-visible': !isHome
+        const appContainerClass = React.addons.classSet({
+            'app-container': true,
+            'expanded': !isHome,
         });
 
         return (
             <div className="page-container">
-                <img src="assets/images/shi.svg" className={logoClass} />
                 <div className={appContainerClass}>
+                    <Header expanded={!isHome} />
+                    <RouteHandler />
                 </div>
-                <Header expanded={!isHome} />
-                <RouteHandler />
             </div>
         );
     }

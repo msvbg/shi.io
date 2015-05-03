@@ -91,7 +91,7 @@ export function isCJKCharacter (character) {
             return true;
         }
     }
-    
+
     return false;
 }
 
@@ -260,7 +260,7 @@ export function smartPartition (input) {
     function isMatch(substr) {
         return function (partitioner) {
             const matchedString = partitioner.match(substr);
-            
+
             if (matchedString.length > 0) {
                 partition.push({
                     string: matchedString,

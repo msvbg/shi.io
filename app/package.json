@@ -1,5 +1,12 @@
 {
+  "name": "shi.io",
+  "version": "0.0.1",
   "browserify": {
-    "transform": [ "babelify" ]
+    "transform": [
+      "babelify"
+    ]
+  },
+  "dependencies": {
+    "jquery": "^2.1.3"
   }
 }

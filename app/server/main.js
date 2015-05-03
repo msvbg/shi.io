@@ -1,7 +1,9 @@
-import api from 'app/server/api';
+import * as api from 'app/server/api';
 import express from 'express';
 import compression from 'compression';
 import bodyParser from 'body-parser';
+
+console.log(api);
 
 let app = express();
 
@@ -13,7 +15,7 @@ app.get('/api/search', function (req, res) {
     let searchQuery = req.query.query;
 
     if (!searchQuery) { return res.json([]); }
-    
+
     api.search(searchQuery)
         .then(function (result) {
             res.json(result);

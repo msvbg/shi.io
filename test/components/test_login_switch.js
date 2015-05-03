@@ -1,5 +1,3 @@
-jest.autoMockOff();
-
 import mockSuperagent from '../mocks/mock_superagent.js';
 jest.setMock('superagent', mockSuperagent);
 

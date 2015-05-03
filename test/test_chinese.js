@@ -1,7 +1,7 @@
-jest.autoMockOff();
-
 import chinese from 'app/common/chinese.js';
 import R from 'ramda';
+
+console.log(chinese);
 
 describe('isCJKCharacter', function () {
     it('returns false on illegal input', function () {
@@ -63,10 +63,10 @@ describe('diacriticSyllableToNumbered', function () {
 
 describe('numberedSyllableToDiacritic', function () {
     it('converts numbered syllables to syllables with diacritics', function () {
-        expect(chinese.numberedSyllableToDiacritic('you2')).toBe('yóu');  
-        expect(chinese.numberedSyllableToDiacritic('LÜ3')).toBe('LǙ');  
-        expect(chinese.numberedSyllableToDiacritic('fei1')).toBe('fēi');  
-        expect(chinese.numberedSyllableToDiacritic('jing4')).toBe('jìng');  
+        expect(chinese.numberedSyllableToDiacritic('you2')).toBe('yóu');
+        expect(chinese.numberedSyllableToDiacritic('LÜ3')).toBe('LǙ');
+        expect(chinese.numberedSyllableToDiacritic('fei1')).toBe('fēi');
+        expect(chinese.numberedSyllableToDiacritic('jing4')).toBe('jìng');
     });
 });
 
