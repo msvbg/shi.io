@@ -22,8 +22,10 @@ export default React.createClass({
         // Make the entry view sticky upon scroll
         window.onscroll = this._updateEntryViewPosition;
     },
-    componentDidUnmount: function () {
-        console.log("UNMOUNT");
+    componentWillUnmount: function () {
+        SearchResultStore.removeListener(
+            SearchResultEvents.VIEWED_SEARCH_RESULT_CHANGED,
+            this._onChange);
     },
     componentDidUpdate: function() {
         this._updateEntryViewPosition();
@@ -79,7 +81,6 @@ export default React.createClass({
 
     _onChange: function () {
         const searchResults = SearchResultStore.getSearchResults();
-        console.log("ON CHANGE");
         this.setState({
             searchResults: searchResults,
             selected: R.head(searchResults)
